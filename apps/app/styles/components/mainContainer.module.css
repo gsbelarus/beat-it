@@ -1,0 +1,17 @@
+.body{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container{
+  width: 1200px;
+}
+.header{
+  background: black;
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+}
+.content{
+  padding: 20px;
+}

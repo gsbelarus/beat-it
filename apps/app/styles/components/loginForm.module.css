@@ -1,0 +1,38 @@
+.body{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.textField{
+  position: relative;
+}
+.textField_field{
+  font-size: 20px;
+  outline: none;
+  padding: 5px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+.textField_errorMessage{
+  white-space: nowrap;
+  left: 0;
+  bottom: 5px;
+  position: absolute;
+  color: red;
+}
+.loginButton{
+  display: flex;
+  justify-content: center;
+}
+.loginButton_button{
+  padding: 5px 10px;
+  font-size: 20px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.loginButton_button:hover{
+  border-radius: 20px;
+  background: #adadad;
+}
