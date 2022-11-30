@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
 import s from '../styles/Components/loginForm.module.css'
 import {setIsAuth} from "../store/slices/authSlice";
+import {getUser,setUser} from "../api";
 
 interface formInterface {
   email: string,
@@ -23,8 +24,8 @@ const LoginForm = () => {
   } = useForm<formInterface>({
     mode: 'all',
   })
-  const onSubmit = data => {
-    dispatch(setIsAuth(true))
+  const onSubmit = async data => {
+    //dispatch(setIsAuth(true))
     reset()
   }
 
