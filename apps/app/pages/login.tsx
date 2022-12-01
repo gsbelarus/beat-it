@@ -1,11 +1,11 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {useDispatch, useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
-import s from '../styles/components/loginForm.module.css'
+import s from '../styles/pages/LoginAndSignUpForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
 import {logIn} from "../store/slices/authSlice";
 import {useRouter} from "next/router";
+import Cookies from "js-cookie";
 
 interface formInterface {
   email: string,
@@ -36,17 +36,17 @@ const Login = () => {
   })
   const onSubmit = async data => {
     await dispatch(logIn({email:data.email,password:data.password}))
-    router.push('')
+    router.push('/')
     reset()
   }
 
-  if (isAuth) {
+  if (isAuth || Cookies.get('userId') !== undefined) {
     router.push('/')
   }
 
   return (
     <div className={s.body}>
-      <h1>Login</h1>
+      <h1 className={s.text}>Login</h1>
       <div className={s.container}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.textField}>

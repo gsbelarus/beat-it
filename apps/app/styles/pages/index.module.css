@@ -1,2 +1,21 @@
-.page {
+.body{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.text{
+  color: white;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.logOutButton{
+  padding: 5px 10px;
+  font-size: 20px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+.logOutButton:hover{
+
+  border-radius: 20px;
+  background: #adadad;
 }

@@ -1,12 +1,23 @@
+import {headers} from "next/headers";
+
 const axios = require('axios')
 
-const instance= axios.default.create({
-  baseURL:"http://localhost:4201/"
+const instance = axios.default.create({
+  baseURL: "http://localhost:4201/",
+  withCredentials:true
 })
 
-export const signUp = (data) => {
-  return instance.post('signUp',data)
-}
-export const login = (data) => {
-  return instance.post('login',data)
+export const auth = {
+  signUp(data){
+    return instance.post('signUp', data)
+  },
+  login(data){
+    return instance.post('login', data)
+  },
+  logout(){
+    return instance.delete('login')
+  },
+  me(){
+    return instance.get('me')
+  }
 }

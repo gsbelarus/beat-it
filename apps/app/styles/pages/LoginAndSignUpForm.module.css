@@ -51,3 +51,8 @@
 .changeFormLink_link:hover{
   color: #258df5;
 }
+.text{
+  color: white;
+  font-size: 30px;
+  margin-bottom: 20px;
+}

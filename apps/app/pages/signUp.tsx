@@ -1,11 +1,11 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {useDispatch, useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
-import s from '../styles/components/loginForm.module.css'
+import s from '../styles/pages/LoginAndSignUpForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
 import {createNewUser} from "../store/slices/authSlice";
 import {useRouter} from "next/router";
+import Cookies from "js-cookie";
 
 interface formInterface {
   email: string,
@@ -46,13 +46,13 @@ const SignUp = () => {
       reset()
     }
   }
-  if (isAuth) {
-    router.push('')
+  if (isAuth || Cookies.get('userId') !== undefined) {
+    router.push('/')
   }
 
   return (
     <div className={s.body}>
-      <h1>Sign up</h1>
+      <h1 className={s.text}>Sign up</h1>
       <div className={s.container}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.textField}>

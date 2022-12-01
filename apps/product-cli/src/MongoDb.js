@@ -1,5 +1,5 @@
 const {MongoClient} = require('mongodb')
-
+const {ObjectId} = require('mongodb')
 const client = new MongoClient('mongodb+srv://sashazernin:2552436qwerrewq@cluster0.c9d6y5r.mongodb.net/mongo?retryWrites=true&w=majority')
 
 exports.startMongo = async () => {
@@ -18,7 +18,7 @@ exports.findUser = {
     return users.findOne({email})
   },
   findUserById(id) {
-    return users.findOne({_id:id})
+    return users.findOne({_id:ObjectId(id)})
   }
 }
 
