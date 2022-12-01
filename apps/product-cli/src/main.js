@@ -1,43 +1,38 @@
 const express = require('express')
 const cors = require('cors')
-const {MongoClient} = require('mongodb')
-
+const MongoDb = require('./MongoDb')
 
 const PORT = process.env.PORT || 4201
-
-const client = new MongoClient('mongodb+srv://sashazernin:2552436qwerrewq@cluster0.c9d6y5r.mongodb.net/mongo?retryWrites=true&w=majority')
-
-const start = async () => {
-  try{
-    await client.connect()
-    console.log('connect passed')
-    const users = client.db().collection('users')
-  }catch(e){
-    console.log(e)
-  }
-}
-
-const users = client.db().collection('users')
 
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended: true}))
 
 app.use(cors())
 app.listen(PORT, () => {
-  start()
+  MongoDb.startMongo()
   console.log('Start server')
 })
 
-app.get('/getUser',(req, res) => {
-  res.json({
-    message: 'ok'
-  })
-})
-
-app.post('/newUser',(req, res) => {
-  users.insertOne(req.body)
-    res.json({message:'ok'})
+app.post('/signUp', (req, res) => {
+    try {
+      if (Object.hasOwn(req.body, 'email') && Object.hasOwn(req.body, 'password') && Object.keys(req.body).length === 2) {
+        const addUser = async () => {
+          const user = await MongoDb.findUser.findUserByEmail(req.body.email)
+          if (user === null) {
+            const newUser = await MongoDb.addUser(req.body)
+            res.json({statusCode: 0, message: 'ok', userId: newUser._id})
+          } else {
+            res.json({statusCode: 1, message: 'This user already exists'})
+          }
+        }
+        addUser()
+      } else {
+        res.json({statusCode: 2, message: "you must pass the object:{'email':email,'password':password}"})
+      }
+    } catch (error) {
+      res.json({statusCode: 2, message: error})
+    }
   }
 )

@@ -4,6 +4,7 @@ import {Navigate} from "react-router-dom";
 import s from '../styles/components/loginForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
+import {signUp} from "../api";
 
 interface formInterface {
   email: string,
@@ -37,7 +38,7 @@ const SignUp = () => {
   })
   const onSubmit = async (data) => {
     if((data.password,data.repeatPassword)) {
-      //dispatch(setIsAuth(true))
+      const resp = await signUp({email:data.email,password:data.password})
       reset()
     }
   }
@@ -71,7 +72,6 @@ const SignUp = () => {
             <input className={s.textField_field} {...register('password',
               {
                 required: "required filed",
-                validate:value => value === getValues('password') || 'passwords must match'
               })}
                    onFocus={() => {
                      clearErrors('password')
@@ -86,7 +86,7 @@ const SignUp = () => {
               {
                 required: "required filed",
                 validate: {
-                  value:value => value === getValues('password') || 'error'
+                  value:value => value === getValues('password') || 'passwords must match'
                 }
               })}
                    onFocus={() => {
