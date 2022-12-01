@@ -29,10 +29,52 @@ app.post('/signUp', (req, res) => {
         }
         addUser()
       } else {
-        res.json({statusCode: 2, message: "you must pass the object:{'email':email,'password':password}"})
+        res.json({statusCode: 1, message: "you must pass the object:{'email':email,'password':password}"})
       }
     } catch (error) {
-      res.json({statusCode: 2, message: error})
+      res.json({statusCode: 1, message: error})
+    }
+  }
+)
+app.post('/login', (req, res) => {
+    try {
+      const checkUser = async () => {
+        const user = await MongoDb.findUser.findUserByEmail(req.body.email)
+        if(user !== null){
+          if(user.password === req.body.password){
+            res.json({statusCode: 0, message: 'ok',userId:user._id})
+          }else{
+            res.json({statusCode: 1, message: 'password is not correct'})
+          }
+        }else{
+          res.json({statusCode: 1, message: 'the user with this email address is not registered'})
+
+        }
+      }
+      checkUser()
+    } catch (error) {
+      res.json({statusCode: 1, message: error})
+    }
+  }
+)
+app.post('/login', (req, res) => {
+    try {
+      const checkUser = async () => {
+        const user = await MongoDb.findUser.findUserByEmail(req.body.email)
+        if(user !== null){
+          if(user.password === req.body.password){
+            res.json({statusCode: 0, message: 'ok',userId:user._id})
+          }else{
+            res.json({statusCode: 1, message: 'password is not correct'})
+          }
+        }else{
+          res.json({statusCode: 1, message: 'the user with this email address is not registered'})
+
+        }
+      }
+      checkUser()
+    } catch (error) {
+      res.json({statusCode: 1, message: error})
     }
   }
 )

@@ -1,9 +1,11 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import s from '../styles/components/loginForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
+import {logIn} from "../store/slices/authSlice";
+import {useRouter} from "next/router";
 
 interface formInterface {
   email: string,
@@ -20,7 +22,8 @@ const LoginWithStore = () => {
 
 const Login = () => {
   const dispatch = useDispatch()
-  const isAuth = false
+  const router = useRouter()
+  const isAuth = useSelector(state => state.auth.isAuth)
   const {
     register,
     handleSubmit,
@@ -32,12 +35,13 @@ const Login = () => {
     mode: 'all',
   })
   const onSubmit = async data => {
-    //dispatch(setIsAuth(true))
+    await dispatch(logIn({email:data.email,password:data.password}))
+    router.push('')
     reset()
   }
 
   if (isAuth) {
-    return <Navigate to={'/Profile'}/>
+    router.push('/')
   }
 
   return (

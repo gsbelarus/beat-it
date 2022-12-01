@@ -18,7 +18,7 @@ exports.findUser = {
     return users.findOne({email})
   },
   findUserById(id) {
-    return users.findOne({id})
+    return users.findOne({_id:id})
   }
 }
 

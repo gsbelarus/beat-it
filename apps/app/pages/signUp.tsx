@@ -1,15 +1,16 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import s from '../styles/components/loginForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
-import {signUp} from "../api";
+import {createNewUser} from "../store/slices/authSlice";
+import {useRouter} from "next/router";
 
 interface formInterface {
   email: string,
   password: string,
-  repeatPassword:string
+  repeatPassword: string
 }
 
 const SignUpWithStore = () => {
@@ -21,10 +22,10 @@ const SignUpWithStore = () => {
 }
 
 
-
 const SignUp = () => {
   const dispatch = useDispatch()
-  const isAuth = false
+  const router = useRouter()
+  const isAuth = useSelector(state => state.auth.isAuth)
   const {
     register,
     handleSubmit,
@@ -37,13 +38,16 @@ const SignUp = () => {
     mode: 'all',
   })
   const onSubmit = async (data) => {
-    if((data.password,data.repeatPassword)) {
-      const resp = await signUp({email:data.email,password:data.password})
+    if ((data.password, data.repeatPassword)) {
+      const result = await dispatch(createNewUser({email: data.email, password: data.password}))
+      if (result) {
+        router.push('/login')
+      }
       reset()
     }
   }
   if (isAuth) {
-    return <Navigate to={'/Profile'}/>
+    router.push('')
   }
 
   return (
@@ -86,7 +90,7 @@ const SignUp = () => {
               {
                 required: "required filed",
                 validate: {
-                  value:value => value === getValues('password') || 'passwords must match'
+                  value: value => value === getValues('password') || 'passwords must match'
                 }
               })}
                    onFocus={() => {

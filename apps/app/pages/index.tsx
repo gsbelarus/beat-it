@@ -15,7 +15,9 @@ const Index = () => {
   const isAuth = useSelector(state => state.auth.isAuth)
   const dispatch = useDispatch()
   const router = useRouter()
-  dispatch(setIsAuth(false))
+  if(isAuth === null){
+    dispatch(setIsAuth(false))
+  }
   if(isAuth == null){
     return (
       <div>
@@ -23,7 +25,6 @@ const Index = () => {
       </div>
     )
   }
-  console.log(!isAuth)
   if(!isAuth){
     router.push('/login')
   }else{
