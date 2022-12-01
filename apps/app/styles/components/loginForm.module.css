@@ -5,6 +5,9 @@
   align-items: center;
   flex-direction: column;
 }
+.container{
+  position: relative;
+}
 .textField{
   position: relative;
 }
@@ -35,4 +38,16 @@
 .loginButton_button:hover{
   border-radius: 20px;
   background: #adadad;
+}
+.changeFormLink{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+.changeFormLink_link{
+  cursor: pointer;
+  color: white;
+}
+.changeFormLink_link:hover{
+  color: #258df5;
 }

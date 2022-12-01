@@ -1,17 +1,38 @@
 import MainContainer from "../components/MainContainer";
-import LoginForm from "../components/LoginForm";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsAuth} from "../store/slices/authSlice";
+import {useRouter} from "next/router";
 
-export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
+const IndexWithStore = () => {
   return (
     <MainContainer>
-      <LoginForm/>
+      <Index/>
     </MainContainer>
   )
 }
 
-export default Index;
+const Index = () => {
+  const isAuth = useSelector(state => state.auth.isAuth)
+  const dispatch = useDispatch()
+  const router = useRouter()
+  dispatch(setIsAuth(false))
+  if(isAuth == null){
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+  console.log(!isAuth)
+  if(!isAuth){
+    router.push('/login')
+  }else{
+    return(
+      <div>
+        user
+      </div>
+    )
+  }
+}
+
+export default IndexWithStore;

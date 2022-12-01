@@ -8,11 +8,6 @@ const MainContainer = ({children}) => {
     <Provider store={store}>
       <div className={s.body}>
         <div className={s.container}>
-          <div className={s.header}>
-            <button>
-              Login
-            </button>
-          </div>
           <div className={s.content}>
             {children}
           </div>
