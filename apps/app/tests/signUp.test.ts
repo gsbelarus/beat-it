@@ -1,4 +1,4 @@
-import {signUp} from "../api";
+import {signUp} from "../api.ts";
 
 const trueData={
   email:'sashazernin1@gmail.com',
