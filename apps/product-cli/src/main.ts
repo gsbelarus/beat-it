@@ -77,7 +77,6 @@ app.get('/me', (req, res) => {
 )
 app.delete('/login', (req, res) => {
   try{
-    console.log('123')
     res.clearCookie('userId')
     res.json()
   }catch (e){

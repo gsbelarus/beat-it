@@ -14,15 +14,15 @@ exports.startMongo = async () => {
 const users = client.db().collection('users')
 
 exports.findUser = {
-  findUserByEmail(email){
+  findUserByEmail(email:string):object{
     return users.findOne({email})
   },
-  findUserById(id) {
+  findUserById(id:string):object {
     return users.findOne({_id:ObjectId(id)})
   }
 }
 
-exports.addUser = (data) => {
+exports.addUser = (data:object):object => {
   return users.insertOne(data)
 }
 

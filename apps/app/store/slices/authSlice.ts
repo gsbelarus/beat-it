@@ -1,13 +1,16 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {auth} from "../../api";
 
-const initialState = {
+const initialState:{
+  isAuth:boolean,
+  email:string
+} = {
   isAuth: false,
   email: null
 }
 
 export const createNewUser = createAsyncThunk('auth/createNewUser',
-  async (data) => {
+  async (data:object) => {
     try {
       const resp = await auth.signUp(data)
       if (resp.data.statusCode === 0) {
@@ -23,7 +26,7 @@ export const createNewUser = createAsyncThunk('auth/createNewUser',
   }
 )
 export const logIn = createAsyncThunk('auth/logIn',
-  async (data) => {
+  async (data:object) => {
     try {
       const resp = await auth.login(data)
       if (resp.data.statusCode !== 0) {
@@ -35,7 +38,7 @@ export const logIn = createAsyncThunk('auth/logIn',
   }
 )
 export const Me = createAsyncThunk('auth/Me',
-  async (data, {dispatch}) => {
+  async (_, {dispatch}) => {
     try {
       const resp = await auth.me()
       dispatch(setEmail(resp.data.email))
