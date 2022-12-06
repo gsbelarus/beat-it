@@ -1,10 +1,10 @@
-import {SubmitHandler, useForm} from 'react-hook-form'
-import {useDispatch, useSelector} from "react-redux";
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from "react-redux";
 import s from '../styles/pages/LoginAndSignUpForm.module.css'
 import MainContainer from "../components/MainContainer";
 import Link from "next/link";
-import {createNewUser} from "../store/slices/authSlice";
-import {useRouter} from "next/router";
+import { createNewUser } from "../store/slices/authSlice";
+import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
 interface formInterface {
@@ -16,7 +16,7 @@ interface formInterface {
 const SignUpWithStore = () => {
   return (
     <MainContainer>
-      <SignUp/>
+      <SignUp />
     </MainContainer>
   )
 }
@@ -32,15 +32,16 @@ const SignUp = () => {
     setError,
     getValues,
     clearErrors,
-    formState: {errors},
+    formState: { errors },
     reset,
   } = useForm<formInterface>({
     mode: 'all',
   })
   const onSubmit = async (data) => {
     if ((data.password, data.repeatPassword)) {
-      const result = await dispatch(createNewUser({email: data.email, password: data.password}))
+      const result = await dispatch(createNewUser({ email: data.email, password: data.password }))
       if (result) {
+        alert('verify your email')
         router.push('/login')
       }
       reset()
@@ -64,11 +65,11 @@ const SignUp = () => {
                   message: 'Please enter the valid email'
                 }
               })}
-                   onFocus={() => {
-                     clearErrors('email')
-                   }}
-                   placeholder={"Email"}
-                   type='text'
+              onFocus={() => {
+                clearErrors('email')
+              }}
+              placeholder={"Email"}
+              type='text'
             />
             {errors.email && <span className={s.textField_errorMessage}>{errors.email.message}</span>}
           </div>
@@ -77,11 +78,11 @@ const SignUp = () => {
               {
                 required: "required filed",
               })}
-                   onFocus={() => {
-                     clearErrors('password')
-                   }}
-                   placeholder={"Password"}
-                   type='password'
+              onFocus={() => {
+                clearErrors('password')
+              }}
+              placeholder={"Password"}
+              type='password'
             />
             {errors.password && <span className={s.textField_errorMessage}>{errors.password.message}</span>}
           </div>
@@ -93,11 +94,11 @@ const SignUp = () => {
                   value: value => value === getValues('password') || 'passwords must match'
                 }
               })}
-                   onFocus={() => {
-                     clearErrors('repeatPassword')
-                   }}
-                   placeholder={"Repeat password"}
-                   type='password'
+              onFocus={() => {
+                clearErrors('repeatPassword')
+              }}
+              placeholder={"Repeat password"}
+              type='password'
             />
             {errors.repeatPassword && <span className={s.textField_errorMessage}>{errors.repeatPassword.message}</span>}
           </div>

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "server": "ts-node ./apps/product-cli/src/main.ts"
   },
   "private": true,
   "dependencies": {
@@ -16,9 +17,12 @@
     "cookie-parser": "^1.4.6",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
     "js-cookie": "^3.0.1",
     "mongodb": "^4.12.1",
     "next": "13.0.0",
+    "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.7",
