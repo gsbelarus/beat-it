@@ -1,56 +1,55 @@
-const { MongoClient } = require('mongodb')
-const { ObjectId } = require('mongodb')
-const client = new MongoClient('mongodb+srv://sashazernin:2552436qwerrewq@cluster0.c9d6y5r.mongodb.net/mongo?retryWrites=true&w=majority')
+import { MongoClient } from 'mongodb';
+import { ObjectId } from 'mongodb';
+const client = new MongoClient(
+  'mongodb+srv://sashazernin:2552436qwerrewq@cluster0.c9d6y5r.mongodb.net/mongo?retryWrites=true&w=majority'
+);
 
-exports.startMongo = async () => {
+export const startMongo = async () => {
   try {
-    await client.connect()
-    console.log('connect passed')
+    await client.connect();
+    console.log('connect passed');
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
-const users = client.db().collection('users')
+const users = client.db().collection('users');
 
-exports.findUser = {
+export const findUser = {
   findUserByEmail(email: string): object {
-    return users.findOne({ email })
+    return users.findOne({ email });
   },
   findUserById(id: string): object {
-    return users.findOne({ _id: ObjectId(id) })
+    return users.findOne({ _id: new ObjectId(id) });
   },
   findUserByToken(token: string): object {
-    return users.findOne({ token })
-  }
-}
+    return users.findOne({ token });
+  },
+};
 
-exports.checkVerification = async (email: string) => {
-  const user = await users.findOne({ email })
+export const checkVerification = async (email: string) => {
+  const user = await users.findOne({ email });
   if (user.verified === true) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
-}
+};
 
-exports.addUser = (data: object): object => {
-  return users.insertOne(data)
-}
+export const addNewUser = (data: object): object => {
+  return users.insertOne(data);
+};
 
-exports.verifyUser = (id: string, token: string) => {
+export const verifyUser = (id: string, token: string) => {
   return users.updateOne(
-    { _id: ObjectId(id) },
+    { _id: new ObjectId(id) },
     {
       $set: {
-        verified: true
+        verified: true,
       },
       $unset: {
-        token
-      }
+        token,
+      },
     }
-  )
-}
-
-
-
+  );
+};

@@ -1,5 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // ... rest
+  },
   "files": [],
   "include": [],
   "references": [

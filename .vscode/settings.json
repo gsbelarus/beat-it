@@ -1,0 +1,15 @@
+{
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "javascript.format.semicolons": "insert",
+    "javascript.inlayHints.enumMemberValues.enabled": true,
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.preferences.useAliasesForRenames": false,
+    "typescript.format.insertSpaceAfterConstructor": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "typescript.format.semicolons": "insert",
+    "typescript.inlayHints.enumMemberValues.enabled": true,
+    "typescript.preferences.useAliasesForRenames": false,
+}
